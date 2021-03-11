@@ -1,6 +1,7 @@
 defmodule PoeticoinsWeb.CryptoDashboardLive do
   use PoeticoinsWeb, :live_view
   alias Poeticoins.Product
+  import PoeticoinsWeb.ProductHelpers
 
   def mount(_params, _session, socket) do
     socket = assign(socket, trades: %{}, products: [])
@@ -54,5 +55,10 @@ defmodule PoeticoinsWeb.CryptoDashboardLive do
   def handle_info({:new_trade, trade}, socket) do
     socket = update(socket, :trades, &Map.put(&1, trade.product, trade))
     {:noreply, socket}
+  end
+
+  defp grouped_products_by_exchange_name do
+    Poeticoins.available_products()
+    |> Enum.group_by(& &1.exchange_name)
   end
 end
