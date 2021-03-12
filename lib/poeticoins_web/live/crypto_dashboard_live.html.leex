@@ -17,34 +17,7 @@
     </form>
 </div>
 <div class="product-components">
-    <%= for product <- @products, trade = @trades[product], not is_nil(trade) do%>
-        <div class="product-component">
-            <div class="currency-container">
-                <img class="icon" scr="<%= crypto_icon(@socket, product) %>"/>
-                <div class="crypto-name">
-                    <%= crypto_name(product) %>
-                </div>
-            </div>
-
-            <div class="price-container">
-                <ul class="fiat-symbols">
-                    <%= for fiat <- fiat_symbols() do %>
-                        <li class="<%= if fiat_symbol(product) == fiat, do: "active" %>"> <%= fiat %> </li>
-                    <% end %>
-                </ul>
-                <div class="price">
-                    <%= trade.price %>
-                    <%= fiat_character(product) %>
-                </div>
-            </div>
-
-            <div class="exchange-name">
-                <%= product.exchange_name %>
-            </div>
-
-            <div class="trade-time">
-                <%= human_datetime(trade.traded_at) %>
-            </div>
-        </div>
+    <%= for product <- @products do%>
+        <%= live_component(@socket, PoeticoinsWeb.ProductComponent, id: product) %>
     <% end %>
 </div>
