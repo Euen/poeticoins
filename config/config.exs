@@ -15,6 +15,8 @@ config :poeticoins, PoeticoinsWeb.Endpoint,
   pubsub_server: Poeticoins.PubSub,
   live_view: [signing_salt: "Oqtq7M2S"]
 
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
