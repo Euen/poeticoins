@@ -60,23 +60,13 @@ body {
   }
 }
 
-.product-components-container {
+.product-components {
   display: inline-flex;
   flex-flow: row wrap;
-  // justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
-
   flex-grow: 0;
-
   width: 100%;
-
-  // margin-left: auto;
-  // margin-right: auto;
-
-  // text-align: center;
-  // text-align: -moz-center;
-  // text-align: -webkit-center;
 }
 
 
@@ -250,7 +240,6 @@ body {
   margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
-  position: absolute;
 }
 
 .powered-by {
