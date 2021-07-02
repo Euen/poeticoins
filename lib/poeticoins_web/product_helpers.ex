@@ -1,5 +1,6 @@
 defmodule PoeticoinsWeb.ProductHelpers do
   alias PoeticoinsWeb.Router.Helpers, as: Routes
+  alias Poeticoins.Product
 
   def fiat_symbols do
     ["eur", "usd"]
@@ -48,5 +49,10 @@ defmodule PoeticoinsWeb.ProductHelpers do
     fiat_symbol = String.slice(product.currency_pair, 3..6)
 
     %{crypto_symbol: crypto_symbol, fiat_symbol: fiat_symbol}
+  end
+
+  def product_from_string(product_id) do
+    [exchange_name, currency_pair] = String.split(product_id, ":")
+    Product.new(exchange_name, currency_pair)
   end
 end

@@ -1,6 +1,7 @@
 defmodule PoeticoinsWeb.ProductComponent do
   use PoeticoinsWeb, :live_component
   import PoeticoinsWeb.ProductHelpers
+  alias PoeticoinsWeb.Router.Helpers, as: Routes
 
   def update(%{trade: trade} = _assigns, socket) when not is_nil(trade) do
     product_id = to_string(trade.product)
@@ -36,7 +37,9 @@ defmodule PoeticoinsWeb.ProductComponent do
       <div class="currency-container">
           <img class="icon" scr="<%= crypto_icon(@socket, @product) %>"/>
           <div class="crypto-name">
-              <%= crypto_name(@product) %>
+          <a phx-click="show-product" phx-target="<%= @myself %>" phx-value-product-id="<%= to_string(@product) %>">
+            <%= crypto_name(@product) %>
+          </a>
           </div>
       </div>
 
@@ -103,6 +106,16 @@ defmodule PoeticoinsWeb.ProductComponent do
       </div>
     </div>
     """
+  end
+
+  def handle_event("show-product", %{"product-id" => product_id}, socket) do
+    socket =
+      push_redirect(
+        socket,
+        to: Routes.live_path(socket, PoeticoinsWeb.ProductLive, to_string(product_id))
+      )
+
+    {:noreply, socket}
   end
 
   defp to_event(trade) do
