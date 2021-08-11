@@ -56,6 +56,14 @@ config :poeticoins, PoeticoinsWeb.Endpoint,
     ]
   ]
 
+config :poeticoins, :children, [
+  PoeticoinsWeb.Telemetry,
+  {Phoenix.PubSub, name: Poeticoins.PubSub},
+  {Poeticoins.Historical, name: Poeticoins.Historical},
+  PoeticoinsWeb.Endpoint,
+  {Poeticoins.Exchanges.Supervisor, name: Poeticoins.Exchanges.Supervisor}
+]
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
