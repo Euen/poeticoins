@@ -17,8 +17,6 @@ defmodule PoeticoinsWeb.Router do
   scope "/", PoeticoinsWeb do
     pipe_through :browser
 
-    # live "/", PageLive, :index
-    # get "/", ProductController, :index
     live "/", CryptoDashboardLive
     live "/products/:id", ProductLive
   end
